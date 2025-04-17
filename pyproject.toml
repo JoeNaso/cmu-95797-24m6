@@ -1,0 +1,12 @@
+[project]
+name = "cmu-95797-24m6"
+version = "0.1.0"
+description = "CMU-95797-23m6 Data Warehouse project"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "boto3>=1.37.35",
+    "dbt>=1.0.0.40.0",
+    "dbt-duckdb>=1.9.2",
+    "duckdb>=1.2.2",
+]
