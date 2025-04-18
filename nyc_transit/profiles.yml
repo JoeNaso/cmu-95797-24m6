@@ -1,6 +1,7 @@
 default:
-  outputs:
-   dev:
-     type: duckdb
-     path: ../main.db
   target: dev
+  outputs:
+    dev:
+      type: duckdb
+      # schema: core
+      path: cmu.duckdb

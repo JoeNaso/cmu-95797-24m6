@@ -1,6 +1,6 @@
 with source as (
 
-    select * from {{ source('main', 'fhv_tripdata') }}
+    select * from {{ source('raw', 'fhv_tripdata') }}
 
 ),
 

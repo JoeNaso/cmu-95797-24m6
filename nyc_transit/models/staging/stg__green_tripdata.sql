@@ -1,6 +1,6 @@
 with source as (
 
-    select * from {{ source('main', 'green_tripdata') }}
+    select * from {{ source('raw', 'green_tripdata') }}
 
 ),
 

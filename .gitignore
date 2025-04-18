@@ -2,6 +2,7 @@
 .python-version
 sampled-data
 sampled-data.zip
+source_data/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

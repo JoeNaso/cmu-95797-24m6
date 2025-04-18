@@ -1,0 +1,16 @@
+# version: 2
+
+# sources: 
+#   - name: raw
+#     tables:
+#       - name: fhv_tripdata
+#         columns: 
+#           - name: dispatching_base_num
+#             tests:
+#             - not_null
+#             - dbt_expectations.expect_column_to_exist
+#             - relationships:
+#                 to: source('raw','fhv_bases')
+#                 field: base_number       
+#                 config:
+#                   severity: warn       

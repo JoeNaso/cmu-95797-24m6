@@ -43,23 +43,36 @@ def run():
     """)
     bucket = boto3.resource('s3').Bucket(BUCKET)
 
-    for path in paths: 
+    for path in paths:
+        print(f"--- Starting {path}...") 
         for s3_key in list_files(bucket, path):
-            if not 'csv' in s3_key: 
+            if ('csv' not in s3_key and 'parquet' not in s3_key): 
                 continue
             base_name = os.path.basename(s3_key).split('.')[0]
             output_file = os.path.join(output_dir, f"{base_name}_sampled.{output_format}")
             file_key = f"https://{BUCKET}.s3.us-east-1.amazonaws.com/{s3_key}"
             
             print(f"Sampling from: {file_key}")
-            con.execute(f"""
-                COPY (
-                    SELECT *
-                    FROM read_csv('{file_key}', all_varchar=1)
-                    USING SAMPLE {int(sample_as_int)} PERCENT
-                )
-                TO '{output_file}' (FORMAT {output_format.upper()});
-            """)
+            if file_key.endswith('csv'):
+                con.execute(f"""
+                    COPY (
+                        SELECT *
+                        FROM read_csv('{file_key}', all_varchar=1)
+                        USING SAMPLE {int(sample_as_int)} PERCENT
+                    )
+                    TO '{output_file}' (FORMAT {output_format.upper()});
+                """)
+            else:
+                con.execute(f"""
+                    COPY (
+                        SELECT *
+                        FROM read_parquet('{file_key}')
+                        USING SAMPLE {int(sample_as_int)} PERCENT
+                    )
+                    TO '{output_file}' (FORMAT {output_format.upper()});
+                """)
+
+        print(f"--- Finished {path}...") 
 
     # Zip the output directory
     print(f"Zipping {output_dir} to {zip_filename}")
