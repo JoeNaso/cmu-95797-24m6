@@ -1,5 +1,6 @@
 # User-generated
 .python-version
+.cmu-wh
 sampled-data
 sampled-data.zip
 source_data/*
