@@ -1,0 +1,19 @@
+models:
+
+  - name: mart__fact_all_trips
+    description: "all trips including bikes and taxis with duration"
+    columns:
+      - name: type
+        description: ""
+
+      - name: started_at_ts
+        description: ""
+
+      - name: ended_at_ts
+        description: ""
+
+      - name: duration_min
+        description: ""
+
+      - name: duration_sec
+        description: ""

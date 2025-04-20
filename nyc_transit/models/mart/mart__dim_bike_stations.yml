@@ -1,0 +1,17 @@
+models:
+  - name: mart__dim_bike_stations
+    description: "bike stations with name, latitude and longitude"
+    columns:
+      - name: station_id
+        description: "bike station id, primary key"
+        tests:
+              - unique
+
+      - name: station_name
+        description: ""
+
+      - name: station_lat
+        description: ""
+
+      - name: station_lng
+        description: ""

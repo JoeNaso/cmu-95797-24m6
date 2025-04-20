@@ -1,0 +1,19 @@
+models:
+
+  - name: stg__fhv_bases
+    description: ""
+    columns:
+      - name: base_number
+        description: ""
+
+      - name: base_name
+        description: ""
+
+      - name: dba
+        description: ""
+
+      - name: dba_category
+        description: ""
+
+      - name: filename
+        description: ""

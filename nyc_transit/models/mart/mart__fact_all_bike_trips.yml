@@ -1,0 +1,22 @@
+models:
+
+  - name: mart__fact_all_bike_trips
+    description: "bike trip data normalised with station data stripped out to dim"
+    columns:
+      - name: started_at_ts
+        description: ""
+
+      - name: ended_at_ts
+        description: ""
+
+      - name: duration_min
+        description: ""
+
+      - name: duration_sec
+        description: ""
+
+      - name: start_station_id
+        description: ""
+
+      - name: end_station_id
+        description: ""

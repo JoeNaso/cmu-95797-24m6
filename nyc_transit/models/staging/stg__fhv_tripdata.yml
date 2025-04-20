@@ -1,0 +1,29 @@
+models:
+
+  - name: stg__fhv_tripdata
+    description: ""
+    columns:
+      - name: dispatching_base_num
+        description: ""
+        tests:
+        - relationships:
+            to: ref('staging','stg__fhv_bases')
+            field: base_number 
+
+      - name: pickup_datetime
+        description: ""
+
+      - name: dropoff_datetime
+        description: ""
+
+      - name: pulocationid
+        description: ""
+
+      - name: dolocationid
+        description: ""
+
+      - name: affiliated_base_number
+        description: ""
+
+      - name: filename
+        description: ""

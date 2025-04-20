@@ -1,0 +1,10 @@
+models:
+
+  - name: mart__fact_trips_by_borough
+    description: "number of trips grouped by borough, you can build facts from other facts and dimensions combined"
+    columns:
+      - name: borough
+        description: "borough of the trip from mart__dim_locations"
+
+      - name: trips
+        description: "number of trips as counted from mart__fact_all_taxi_trips"

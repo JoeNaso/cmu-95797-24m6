@@ -1,0 +1,16 @@
+models:
+
+  - name: mart__fact_all_trips_daily
+    description: "all trips including bikes and taxis grouped by day, with averaged trip duration"
+    columns:
+      - name: type
+        description: ""
+
+      - name: date
+        description: ""
+
+      - name: trips
+        description: ""
+
+      - name: average_trip_duration_min
+        description: ""

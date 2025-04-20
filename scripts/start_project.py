@@ -3,10 +3,12 @@ Set up the project dependencies so the warehouse codebase runs on your local mac
 """
 
 import os
+import json
 from pathlib import Path
 import time
 import subprocess
 import shutil
+import platform
 
 
 ENV = ".env"
@@ -54,7 +56,11 @@ def _setup_env():
         shutil.rmtree(venv_dir)
     if not os.getcwd() == THIS_PROJECT:
         os.chdir(THIS_PROJECT)
-    subprocess.run([f"{uv_path}", "venv", VENV, f"--python={PY_VERSION}"], check=True, stdout=subprocess.PIPE)
+    subprocess.run(
+        [f"{uv_path}", "venv", VENV, f"--python={PY_VERSION}"],
+        check=True,
+        stdout=subprocess.PIPE,
+    )
     installs = [
         f"{uv_path}",
         "pip",
@@ -72,6 +78,40 @@ def _setup_env():
     )
 
 
+def _settings_json():
+    machine = platform.system()
+    # mac
+    if machine.lower() == "darwin" or machine.lower() != "windows":
+        paths = {
+            "INTERPRETER_PATH": ".venv/bin/python",
+            "DBT_EXECUTABLE": "${workspaceFolder}/.venv/bin/dbt",
+        }
+    else:
+        paths = {
+            "INTERPRETER_PATH": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+            "DBT_EXECUTABLE": "${workspaceFolder}\\.venv\\Scripts\\dbt.bat",
+        }
+
+    template = {
+        "python.defaultInterpreterPath": paths.get("INTERPRETER_PATH"),
+        "editor.formatOnSave": True,
+        "[jinja]": {"editor.defaultFormatter": "ms-python.black-formatter"},
+        "[sql]": {"editor.defaultFormatter": "sqlfluff.sqlfluff"},
+        "dbtPowerUser.projectRoot": "${workspaceFolder}",
+        "dbtPowerUser.dbtExecutablePath": paths.get("DBT_EXECUTABLE"),
+        "dbtPowerUser.enableHoverDocumentation": True,
+        "dbtPowerUser.enableModelGraph": True,
+        "python.linting.enabled": True,
+        "python.linting.flake8Enabled": True,
+        "[yaml]": {"editor.insertSpaces": True, "editor.tabSize": 2},
+    }
+
+    os.makedirs(os.path.join(os.sep, THIS_PROJECT, ".vscode"), exist_ok=True)
+    settings_path = os.path.join(os.sep, THIS_PROJECT, ".vscode", "settings.json")
+    with open(settings_path, "w") as f:
+        f.write(json.dumps(template, indent=4))
+
+
 def start():
     banner = "Beginning CMU-85797 Warehouse setup..."
     one = "Please make sure you have downloaded the source data ZIP file and placed in the `source_data` folder of this project"
@@ -81,15 +121,18 @@ def start():
     directions = [one, uv, two, three]
     max_len = max(len(line) for line in directions)
     border = "=" * (max_len + 4)
-    buffer = ["",""]
+    buffer = ["", ""]
     print("\n" + border)
     _msg([banner, "", *directions], max_len)
     _env()
     _msg(["Setting up environment... this might take a minute", *buffer], max_len)
     _setup_env()
     _msg([*buffer, "Installations complete!"], max_len)
+
+    _msg([*buffer, "Configuring VSCode settings..."], max_len)
+    _settings_json()
     complete = [
-        "Virtual environemnt setup complete.",
+        "Setup complete.",
         "You can start development on your Warehouse project. Please refer to the README.md to get started",
     ]
     _msg(complete, max_len)

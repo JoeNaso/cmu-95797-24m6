@@ -1,0 +1,17 @@
+models:
+
+  - name: mart__dim_locations
+    description: "taxi locations, used to join with pulocationid and dolocationid,
+      taken from dbt seed. Not tested as data is small enough to check visually, as should be the case with use of seeds"
+    columns:
+      - name: locationid
+        description: "primary key"
+
+      - name: borough
+        description: ""
+
+      - name: zone
+        description: ""
+
+      - name: service_zone
+        description: ""

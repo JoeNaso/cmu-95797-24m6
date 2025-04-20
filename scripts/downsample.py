@@ -19,7 +19,7 @@ paths = [
     "data/bike/",
     "data/taxi/"
 ]
-output_dir_name = "sampled-data"
+output_dir_name = "source_data"
 sample_as_int = 10
 output_format = "parquet"
 zip_filename = f"{output_dir_name}.zip"
