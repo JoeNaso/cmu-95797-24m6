@@ -3,5 +3,4 @@ default:
   outputs:
     dev:
       type: duckdb
-      # schema: core
       path: cmu.duckdb

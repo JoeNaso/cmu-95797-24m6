@@ -9,7 +9,6 @@ dependencies = [
     "dbt-core>=1.9.4",
     "dbt-duckdb>=1.9.2",
     "duckdb>=1.2.2",
-    "ipython>=9.1.0",
 ]
 
 [tool.uv.workspace]

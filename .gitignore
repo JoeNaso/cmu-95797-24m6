@@ -1,10 +1,3 @@
-# User-generated
-.cmu-wh
-.vscode
-sampled-data
-sampled-data.zip
-source_data/*
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -175,3 +168,7 @@ data/
 dbt_packages/
 logs/
 .DS_Store
+.cmu-wh
+.vscode
+*.zip
+source_data/*

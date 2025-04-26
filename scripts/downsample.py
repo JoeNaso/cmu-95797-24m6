@@ -21,7 +21,7 @@ paths = [
 ]
 output_dir_name = "source_data"
 sample_as_int = 10
-output_format = "parquet"
+output_format = "csv"
 zip_filename = f"{output_dir_name}.zip"
 
 
@@ -44,16 +44,20 @@ def run():
     bucket = boto3.resource('s3').Bucket(BUCKET)
 
     for path in paths:
+        subfolder = output_dir / path
+        subfolder.mkdir(parents=True, exist_ok=True)
+
         print(f"--- Starting {path}...") 
-        for s3_key in list_files(bucket, path):
+        all_files = list(list_files(bucket, path))
+        for idx, s3_key in enumerate(all_files):
             if ('csv' not in s3_key and 'parquet' not in s3_key): 
                 continue
             base_name = os.path.basename(s3_key).split('.')[0]
-            output_file = os.path.join(output_dir, f"{base_name}_sampled.{output_format}")
+            output_file = os.path.join(subfolder, f"{base_name}_sampled.{output_format}")
             file_key = f"https://{BUCKET}.s3.us-east-1.amazonaws.com/{s3_key}"
             
             print(f"Sampling from: {file_key}")
-            if file_key.endswith('csv'):
+            if file_key.endswith('csv') or file_key.endswith('.gz'):
                 con.execute(f"""
                     COPY (
                         SELECT *
@@ -71,6 +75,8 @@ def run():
                     )
                     TO '{output_file}' (FORMAT {output_format.upper()});
                 """)
+            if idx > 0 and idx % 10 == 0:
+                print(f"Processed {idx} of {len(all_files)} files...")
 
         print(f"--- Finished {path}...") 
 

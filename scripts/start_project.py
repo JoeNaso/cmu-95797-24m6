@@ -23,18 +23,6 @@ def _msg(steps: list[str], max_len: int) -> None:
         time.sleep(1)
 
 
-def _env():
-    """
-    Write a .env file
-    """
-    if not os.path.exists(os.path.join(os.sep, THIS_PROJECT, ".env")):
-        with open(THIS_PROJECT / ".env", "w") as f:
-            f.write(
-                "# Caution: if you change this value, your warehouse project may not work as expected"
-            )
-            f.write(f"CMU_WH_LOCAL_SOURCE_DATA={THIS_PROJECT}/source_data/")
-
-
 def _setup_env():
     """
     create a virtual env for later usage
@@ -124,7 +112,6 @@ def start():
     buffer = ["", ""]
     print("\n" + border)
     _msg([banner, "", *directions], max_len)
-    _env()
     _msg(["Setting up environment... this might take a minute", *buffer], max_len)
     _setup_env()
     _msg([*buffer, "Installations complete!"], max_len)

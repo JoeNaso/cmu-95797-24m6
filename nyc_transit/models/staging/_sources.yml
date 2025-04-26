@@ -1,10 +1,8 @@
 sources:
   - name: raw
+    schema: raw
     tables:
       - name: bike_data
-        config:
-          external_location: >
-            read_parquet("{{ env_var('CMU_WH_LOCAL_SOURCE_DATA') }}bike/*-citibike-tripdata*.parquet", filename=true)
         columns:
           - name: tripduration
             data_type: CHARACTER VARYING(256)
@@ -74,9 +72,6 @@ sources:
             data_type: CHARACTER VARYING(256)
 
       - name: central_park_weather
-        config:
-          external_location: > 
-            read_csv("{{ env_var('CMU_WH_LOCAL_SOURCE_DATA') }}central_park_weather.csv", filename=true)
         columns:
           - name: station
             data_type: CHARACTER VARYING(256)
@@ -105,9 +100,6 @@ sources:
             data_type: CHARACTER VARYING(256)
 
       - name: fhv_bases
-        config:
-          external_location: >
-            read_csv("{{ env_var('CMU_WH_LOCAL_SOURCE_DATA') }}fhv_bases.csv", filename=true)
         columns:
           - name: base_number
             data_type: CHARACTER VARYING(256)
@@ -124,9 +116,6 @@ sources:
             data_type: CHARACTER VARYING(256)
 
       - name: fhv_tripdata
-        config:
-          external_location: >
-            read_parquet("{{ env_var('CMU_WH_LOCAL_SOURCE_DATA') }}taxi/fhv_tripdata_*.parquet", filename=true)
         columns:
           - name: dispatching_base_num 
             data_type: CHARACTER VARYING(256)
@@ -159,9 +148,6 @@ sources:
             data_type: CHARACTER VARYING(256)
 
       - name: fhvhv_tripdata
-        config:
-          external_location: >
-            read_parquet("{{ env_var('CMU_WH_LOCAL_SOURCE_DATA') }}taxi/fhvhv_tripdata_*.parquet", filename=true)
         columns:
           - name: hvfhs_license_num
             data_type: CHARACTER VARYING(256)
@@ -281,9 +267,6 @@ sources:
             data_type: CHARACTER VARYING(256)
 
       - name: green_tripdata
-        config:
-          external_location: >
-            read_parquet("{{ env_var('CMU_WH_LOCAL_SOURCE_DATA') }}taxi/green_tripdata_*.parquet", filename=true)
         columns:
           - name: vendorid
             data_type: BIGINT
@@ -360,9 +343,6 @@ sources:
             data_type: CHARACTER VARYING(256)
 
       - name: yellow_tripdata
-        config:
-          external_location: >
-            read_parquet("{{ env_var('CMU_WH_LOCAL_SOURCE_DATA') }}taxi/yellow_tripdata_*.parquet", filename=true)
         columns:
           - name: vendorid
             data_type: BIGINT

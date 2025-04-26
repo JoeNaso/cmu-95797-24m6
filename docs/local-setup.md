@@ -19,12 +19,22 @@ With VS Code open:
    - YAML
    - Jinja
 
+### Step 3: Install the DuckDB CLI
+We'll be using DuckDB to run the project on your computer. DuckDB functions like a modern data warehouse, but can be run on your computer with minimal setup. You also do not need to worry about authentication. 
+
+1. Open a Terminal in VS Code (View --> Terminal in the menu)
+2. Install the DuckDB CLI globally on your computer
+   1. [Windows]: `winget install DuckDB.cli`
+   2. [Mac]: `curl https://install.duckdb.org | sh
+
+You can find more details and alternative installation instructions on the [DuckDB Installation page](https://duckdb.org/docs/installation/?version=stable&environment=cli&download_method=direct).
+
 ### Step 3: Setup Virtual Environment
 You only have to do this once, but if you happen to run these steps multiple times, that is ok. 
 
 1. Open a Terminal in VS Code (View --> Terminal in the menu)
 2. Run the following to change directories:
-   1. `cd cmu-95797-24m6`
+   1. `cd cmu-95797`
 3. Install `uv`, a package manager which will make setup easy
    1. **Windows**: [Installation instructions](https://docs.astral.sh/uv/getting-started/installation/#__tabbed_1_2)
    2. **Mac**: [Installation instructions](https://docs.astral.sh/uv/getting-started/installation/#__tabbed_1_1)
